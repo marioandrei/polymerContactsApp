@@ -22,10 +22,7 @@
 		</iron-ajax>
 
 		<template is="dom-repeat" items ="{{data.results}}" as ="card">
-				desde app : {{ card.user.name.first}}
 
-
-				desde card:
 				<contacts-card contact="{{card}}"></contacts-card>
 		</template>
 	</template>
