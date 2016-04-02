@@ -1,0 +1,43 @@
+<link rel="import"  href="../../bower_components/polymer/polymer.html">
+<link rel="import"  href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import"  href="../contacts-card/contacts-card.html">
+
+<dom-module id="contacts-app">
+	<template>
+		<style>
+			:host{
+				display: block;
+			}
+		</style>
+
+		app here
+
+
+		<iron-ajax
+		    auto
+		    url="https://randomuser.me/api/?results=10"
+		    handle-as="json"
+		    last-response="{{data}}"
+		    debounce-duration="300">
+		</iron-ajax>
+
+		<template is="dom-repeat" items ="{{data.results}}" as ="card">
+				desde app : {{ card.user.name.first}}
+
+
+				desde card:
+				<contacts-card contact="{{card}}"></contacts-card>
+		</template>
+	</template>
+
+	<script>
+	Polymer({
+		is: 'contacts-app',
+		ready: function () {
+			console.log('asdas');
+		}
+
+	});
+	</script>
+
+</dom-module>

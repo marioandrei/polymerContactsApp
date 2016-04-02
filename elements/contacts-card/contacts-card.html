@@ -1,0 +1,27 @@
+<link rel="import"  href="../../bower_components/polymer/polymer.html">
+<link rel="import"  href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="contacts-card">
+	<template>
+		<style>
+			:host{
+				display: block;
+			}
+		</style>
+
+		{{contact.user.name.first}}
+	</template>
+
+	<script>
+	Polymer({
+		is: 'contacts-card',
+		properties:{
+			contact:{
+				type: Object
+			}
+		}
+
+	});
+	</script>
+
+</dom-module>

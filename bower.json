@@ -1,0 +1,22 @@
+{
+  "name": "app",
+  "authors": [
+    "marioandrei <marioandrei@gmail.com>"
+  ],
+  "description": "test app for polymer",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.4.0",
+    "iron-ajax": "PolymerElements/iron-ajax#~1.2.0"
+  }
+}
