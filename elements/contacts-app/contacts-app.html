@@ -1,5 +1,13 @@
 <link rel="import"  href="../../bower_components/polymer/polymer.html">
 <link rel="import"  href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import"  href="../../bower_components/paper-card/paper-card.html">
+<link rel="import"  href="../../bower_components/paper-styles/paper-styles.html">
+
+<link rel="import"  href="../../bower_components/paper-styles/color.html">
+<link rel="import"  href="../../bower_components/paper-styles/typography.html">
+<link rel="import"  href="../../bower_components/paper-material/paper-material.html">
+<link rel="import"  href="../../bower_components/paper-styles/paper-styles.html">
+<link rel="import"  href="../../bower_components/iron-image/iron-image.html">
 <link rel="import"  href="../contacts-card/contacts-card.html">
 
 <dom-module id="contacts-app">
@@ -8,9 +16,100 @@
 			:host{
 				display: block;
 			}
-		</style>
 
-		app here
+
+
+			 #notes {
+    @apply(--layout-vertical);
+    @apply(--layout-wrap);
+    height: 344px;
+    width: 384px;
+  }
+
+  #notes > paper-card {
+    box-sizing: border-box;
+    max-width: 184px;
+    margin: 4px;
+    flex: 0 0 auto;
+  }
+
+  .centered{
+  	    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+		</style>
+		<div class="vertical-section-container centered">
+			
+		<h1>contacts-app</h1>
+
+<paper-card heading="Emmental" image="http://placehold.it/350x150/FFC107/000000">
+  <div class="card-content">
+    Emmentaler or Emmental is a yellow, medium-hard cheese that originated in the area around Emmental, Switzerland. It is one of the cheeses of Switzerland, and is sometimes known as Swiss cheese.
+  </div>
+  <div class="card-actions">
+    <paper-button>Share</paper-button>
+    <paper-button>Explore!</paper-button>
+  </div>
+</paper-card>
+
+
+<h3>hellos</h3>
+
+<paper-card heading="Top western road trips" image="./elements/contacts-app/trip.jpg" class="white">
+  <div class="card-content">1,000 miles of wonder</div>
+  <div class="card-actions">
+    <paper-button>Share</paper-button>
+    <paper-button>Explore</paper-button>
+    <paper-icon-button icon="hardware:keyboard-arrow-up" title="more info" onclick="_toggle()" style="float:right;">
+    </paper-icon-button>
+    <iron-collapse id="more-info" style="width:100%;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent enim ante, tempus eget volutpat ac, cursus ac ante. Nulla facilisi. Praesent sed lacinia ligula. Donec malesuada nisl eget quam iaculis, vel placerat justo cursus.
+    </iron-collapse>
+    <script>
+      function _toggle() {
+        var moreInfo = document.getElementById('more-info');
+        var iconButton = Polymer.dom(event).localTarget;
+        iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-up'
+                                          : 'hardware:keyboard-arrow-down';
+        moreInfo.toggle();
+      }
+    </script>
+  </div>
+</paper-card>
+
+
+
+<h3>grid</h3>
+
+
+<div id="notes">
+  <paper-card heading="Call Jennifer" class="cyan">
+    <div class="card-actions">
+      <paper-icon-button icon="communication:call" style="color:white;"></paper-icon-button>
+      <span>March 19, 2017</span>
+    </div>
+  </paper-card>
+  <paper-card class="dark">
+    <div class="card-content">
+      <p>Groceries:</p>
+      <paper-checkbox>almond milk</paper-checkbox>
+      <paper-checkbox>coconut water</paper-checkbox>
+      <paper-checkbox>cheese</paper-checkbox>
+      <paper-checkbox>green apples</paper-checkbox>
+    </div>
+    <div class="card-actions">
+      <paper-icon-button icon="communication:location-on" style="color:white"></paper-icon-button>
+      <span>Campbell</span>
+    </div>
+  </paper-card>
+  <paper-card heading="clean desk" class="lime"></paper-card>
+  <paper-card image="./elements/contacts-app/trip.jpg" class="amber">
+    <div class="card-content">New cafe opened on Valencia St.</div>
+  </paper-card>
+  <paper-card heading="Yuna tickets on sale 6/24" class="cyan">
+  </paper-card>
+</div>
 
 
 		<iron-ajax
@@ -25,6 +124,9 @@
 
 				<contacts-card contact="{{card}}"></contacts-card>
 		</template>
+
+				</div>
+
 	</template>
 
 	<script>
