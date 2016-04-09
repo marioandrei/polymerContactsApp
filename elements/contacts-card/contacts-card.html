@@ -1,5 +1,30 @@
 <link rel="import"  href="../../bower_components/polymer/polymer.html">
+
 <link rel="import"  href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import"  href="../../bower_components/iron-icon/iron-icon.html">
+ <link rel="import" href="../../bower_components/iron-icons/iron-icons.html"> <!-- the icon names are being retrieved from here -->
+<link rel="import"  href="../../bower_components/paper-card/paper-card.html">
+<link rel="import"  href="../../bower_components/paper-styles/typography.html">
+<link rel="import"  href="../../bower_components/paper-styles/color.html">
+
+
+<!--
+
+a card for the contacts component
+
+Example:
+
+    <contacts-card></contacts-card>
+
+Example:
+
+    <contacts-card>
+      <h2>Hello contacts-card</h2>
+    </contacts-card>
+
+@demo demo/index.html
+-->
 
 <dom-module id="contacts-card">
 	<template>
@@ -7,12 +32,142 @@
 			:host{
 				display: block;
 			}
+			#notes {
+			    @apply(--layout-vertical);
+			    @apply(--layout-wrap);
+			    height: 444px;
+			    width: 308px;
+
+			  }
+
+			  #notes > paper-card {
+			    box-sizing: border-box;
+			    max-width: 145px;
+			    margin: 4px;
+			    flex: 0 0 auto;
+			  }
+
+
+		
+			  paper-card {
+			    width: 100%;
+			  }
+
+			  .horizontal {
+			    @apply(--layout-horizontal);
+			  }
+
+			  .justified {
+			    @apply(--layout-justified);
+			  }
+
+			  .amber {
+			    background: var(--paper-amber-900);
+			  }
+
+			  .lime {
+			    background: var(--paper-lime-500);
+			  }
+
+			  .cyan {
+			    background: var(--paper-cyan-500);
+			  }
+
+			  .dark {
+			    background: var(--paper-blue-grey-500);
+			  }
+			  paper-card.dark, paper-card.amber, paper-card.lime, paper-card.cyan {
+			    color: white;
+			    --paper-card-header-color: white;
+			  }
+
+			  paper-checkbox {
+			    display: block;
+			    margin-bottom: 4px;
+			    --paper-checkbox-label-color: white;
+			    --paper-checkbox-unchecked-color: white;
+			  }
+
+			  paper-icon-button {
+			    color: var(--paper-grey-600);
+			  }
+
+			  paper-icon-button.white {
+			    color: white !important;
+			  }
 		</style>
 
-		<div>
-			{{contact.user.name.first}}
-			{{contact.user.name.last}}
+
+
+<!-- 		<div>
+			{{contact.name.first}}
+			{{contact.name.last}}
+		</div> -->
+
+
+		<!-- <h3>{{contact.name.first}}{{contact.name.last}}</h3> -->
+
+<!-- 		<paper-card heading="Top western road trips" image="{{contact.picture.large}}" class="white">
+		  <div class="card-content">1,000 miles of wonder</div>
+		  <div class="card-actions">
+		    <paper-button>Share</paper-button>
+		    <paper-button>Explore</paper-button>
+		    <paper-icon-button icon="hardware:keyboard-arrow-up" title="more info" onclick="_toggle()" style="float:right;">
+		    </paper-icon-button>
+		    <iron-collapse id="more-info" style="width:100%;">
+		      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent enim ante, tempus eget volutpat ac, cursus ac ante. Nulla facilisi. Praesent sed lacinia ligula. Donec malesuada nisl eget quam iaculis, vel placerat justo cursus.
+		    </iron-collapse>
+		    <script>
+		      function _toggle() {
+		        var moreInfo = document.getElementById('more-info');
+		        var iconButton = Polymer.dom(event).localTarget;
+		        iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-up'
+		                                          : 'hardware:keyboard-arrow-down';
+		        moreInfo.toggle();
+		      }
+		    </script>
+		  </div>
+		</paper-card> -->
+
+
+
+		<div id="notes">
+		  <paper-card heading="Call {{contact.name.first}}" class="cyan">
+		    <div class="card-actions">
+		    	<paper-icon-button icon="communication:call" ></paper-icon-button>
+		    	<span>Birthday:
+		    	<moment-element></moment-element>
+		    	</span>
+		    </div>
+		  </paper-card>
+		  <paper-card class="dark">
+		    <div class="card-content">
+				<iron-icon icon="home"></iron-icon>
+		
+				<p>location:</p>
+
+				<paper-checkbox>{{ contact.location.street}}</paper-checkbox>
+				<paper-checkbox>{{ contact.location.city}}</paper-checkbox>
+				<paper-checkbox>{{ contact.location.state}}</paper-checkbox>
+				<paper-checkbox>{{ contact.location.zip}}</paper-checkbox>
+				<paper-icon-button>asa</paper-icon-button>
+		    </div>
+		    <div class="card-actions">
+		      <paper-icon-button icon="communication:location-on" style="color:white"></paper-icon-button>
+		      <span>{{contact.email}}</span>
+		    </div>
+		  </paper-card>
+		  <paper-card heading=" {{ contact.dob }}" class="lime"></paper-card>
+		  <paper-card heading="{{ contact.username}}" class="cyan">
+		  	<iron-icon icon="icons:star" on-tab="_markAsFavorite"></iron-icon>
+		  	favorite
+		  </paper-card>
+		  <paper-card image="{{contact.picture.large}}" class="amber">
+		    <div class="card-content">{{ contact.phone}}</div>
+		  </paper-card>
 		</div>
+
+
 	</template>
 
 	<script>
@@ -21,6 +176,16 @@
 		properties:{
 			contact:{
 				type: Object
+			},
+			fullName:{
+				type: String,
+				computed: '_computeFullName(contact.name.first, contact.name.last)'
+			},
+			_markAsFavorite: function(){
+				this.toggleAttribute('favorite')
+			},
+			_computeFullName: function(first, last){
+				return first+' '+last;
 			}
 		}
 
